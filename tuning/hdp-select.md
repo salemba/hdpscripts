@@ -1,4 +1,4 @@
-#ERROR
+# ERROR
 
 When installing HDP components using Ambari, you may face this kind of errors : 
 
@@ -55,7 +55,7 @@ Commands:
 Try to run the command ```ambari-python-wrap /usr/bin/hdp-select versions``` and see which file/dir causes the problem.
 
   
-#Solution
+# Solution
  Either [re]move the file/dir causing the problem of just  find the method ```def printVersions():``` and add the filename to this condition (in my case it was usr and hdp):
   if f not in [".", "..", "current", "share", "lost+found","usr","hdp"]:
   
