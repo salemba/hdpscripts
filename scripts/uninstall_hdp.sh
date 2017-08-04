@@ -1,19 +1,33 @@
-sudo yum remove -y hive\*
-sudo yum remove -y oozie\*
-sudo yum remove -y pig\*
-sudo yum remove -y zookeeper\*
-sudo yum remove -y tez\*
-sudo yum remove -y hbase\*
-sudo yum remove -y ranger\*
-sudo yum remove -y knox\*
-sudo yum remove -y ranger\*
-sudo yum remove -y storm\*
-sudo yum remove -y hadoop\*
-sudo yum remove -y hadoop\*
+GREEN='\033[0;32m'
+NC='\033[0m'
+echo -e "Removing HDP previously installed packages......"
+sudo yum remove -d 0 -e 0 -y hive\*
+sudo yum remove -d 0 -e 0 -y oozie\*
+sudo yum remove -d 0 -e 0 -y pig\*
+sudo yum remove -d 0 -e 0 -y zookeeper\*
+sudo yum remove -d 0 -e 0 -y tez\*
+sudo yum remove -d 0 -e 0 -y hbase\*
+sudo yum remove -d 0 -e 0 -y ranger\*
+sudo yum remove -d 0 -e 0 -y knox\*
+sudo yum remove -d 0 -e 0 -y ranger\*
+sudo yum remove -d 0 -e 0 -y storm\*
+sudo yum remove -d 0 -e 0 -y hadoop\*
+echo -e "Major components uninstalled.....................[${GREEN}OK${NC}]"
+echo -e "Stopping ambari server..........................."
 sudo ambari-server stop
-sudo yum erase -y ambari-server
+echo -e "Stopped ambari server............................[${GREEN}OK${NC}]"
+sudo ambari-server reset
+echo -e "Ambari database reset............................[${GREEN}OK${NC}]"
+sudo yum erase -d 0 -e 0 -y ambari-server
+sudo yum erase -d 0 -e 0 -y hdp-select
+sudo yum remove -d 0 -e 0 -y smartsense-hst
+echo -e "Erased Ambari server............................[${GREEN}OK${NC}]"
+sudo -u postgres psql -U postgres -c "drop database ambari"
+sudo yum erase -y postgres\*
+echo -e "Erased Postgres database........................[${GREEN}OK${NC}]"
 sudo ambari-agent stop
 sudo yum erase -y ambari-agent
+echo -e "Erased Ambari agents............................[${GREEN}OK${NC}]"
 sudo rm -Rf /usr/lib/flume
 sudo rm -Rf /usr/lib/storm
 sudo rm -Rf /var/lib/hadoop-hdfs
@@ -69,5 +83,5 @@ sudo rm -Rf /var/log/falcon
 sudo rm -Rf /var/log/knox
 sudo rm -Rf /var/lib/hive
 sudo rm -Rf /var/lib/oozie
-
-echo "Uninstalled All HDP components"
+echo -e "Deleted Ambari related files and directories.........[${GREEN}OK${NC}]"
+echo "Uninstalled All HDP components..........................[${GREEN}Finish${NC}]"
