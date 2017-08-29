@@ -1,0 +1,30 @@
+######################################################################
+#       Solr and Hbase Indexer configuration file for utility
+#   scripts. Copy this config file and edit it to run utility scripts.
+#
+# Version : 1.0
+# Date    : 29/08/2017
+######################################################################
+#Some colors
+RED='\033[0;31m'
+GR='\033[0;32m'
+NC='\033[0m'
+
+#zookeeper connection string, comma separated zk_server:port
+zk_cs=hmaster.dev.fr:2181,rs1.dev.fr:2181,rs2.dev.fr:2181
+#solr/hbase indexer server dns name (without port)
+solr_server=solr.dev.fr
+#hbase indexer server
+hi_server=solr.dev.fr
+#hbase indexer process name used to identify process to stop hbase-indexer
+hbase_indexer_pn=hbase-indexer server
+#name of the solr collection
+collection_name=mycollection
+#Bin dir for Solr
+solr_home=/opt/lucidworks-hdpsearch/solr
+#Bin dir for hbase indexer
+hi_home=/opt/lucidworks-hdpsearch/hbase-indexer
+#HBase Indexer master indexer name
+hi_indexer_name=hbaseindexer
+#Hbase Indexer mapping file name
+hi_mapping=mymappnig.xml
